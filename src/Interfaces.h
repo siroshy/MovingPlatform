@@ -39,6 +39,10 @@ class InterPlatform
 public:
 	InterPlatform() {};
 	virtual ~InterPlatform() {};
+
+	virtual void stop() = 0;
+	virtual void accstop() = 0;
+
 	
 	virtual void moveFwrd() = 0;
 	virtual void movebwrd() = 0;
@@ -52,17 +56,26 @@ public:
 	virtual void circleLft() = 0;
 	virtual void circleRht() = 0;
 
-	virtual void setAccMode(int mode) = 0;
+	virtual void setAccMode(bool mode) = 0;
 	virtual void setAccVal(int acc) = 0;
 
 	virtual void setSpeed(int speed) = 0;
+	virtual void tickMT() = 0;
+	virtual void setMinSpeed(int speed) = 0;
+
 
 protected:
 
-	int accMode;
+	bool accMode;
 	int accVal;
+	int curSpeed;
+	int acc;
 
 	int movingTime;
+	int timeInterval;
+	bool mv; //need moving?
+	int minSpeed = 0;
+	int spm;
 
 	InterDriver *leftDr;
 	InterDriver *rightDr;
