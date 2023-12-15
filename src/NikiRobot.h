@@ -1,18 +1,18 @@
-#ifndef Driver_L256n_H
-#define Driver_L256n_H
+#ifndef Niki_robot_H
+#define Niki_robot_H
 
 #include <Interfaces.h>
 
 
 
-class DriverL256n : public InterDriver
+class Niki : public InterDriver
 {
 public:
-	DriverL256n();
+	Niki();
 
-	DriverL256n(int IN1pin, int IN2pin, int ENpin );
-	
-	~DriverL256n();
+	Niki(int IN1pin, int ENpin);
+
+	~Niki();
 
 	void setDirection(int dir) override; 
 	/*
@@ -28,20 +28,17 @@ public:
 
 	void stMove() override;
 
-
 protected:
 
 	int pinIN1;
-	int pinIN2;
 	int pinEN;
 
 	int IN1;
-	int IN2;
 	int EN;
-
+	
 	void doDir();
 
-	
+
 };
 
 #endif

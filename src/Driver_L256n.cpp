@@ -24,6 +24,9 @@ DriverL256n::DriverL256n(int IN1pin, int IN2pin, int ENpin )
 	invDirect = false;
 	direction = 0;
 	opPWM = 0;
+	pinMode(pinIN1, OUTPUT);
+	pinMode(pinIN2, OUTPUT);
+	pinMode(pinEN, OUTPUT);
 
 }
 
@@ -93,9 +96,9 @@ void DriverL256n::invDir(bool inv)
 
 void DriverL256n::doDir()
 {
-	digitalWrite(IN1, pinIN1);
-	digitalWrite(IN2, pinIN2);
-	analogWrite(opPWM, EN);
+	digitalWrite(pinIN1, IN1);
+	digitalWrite(pinIN2,IN2);
+	analogWrite(pinEN,opPWM);
 }
 
 #endif
