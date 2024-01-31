@@ -15,6 +15,8 @@ public:
 	void stop() override;
 	void accstop() override;
 
+	void diffSpeed(int L, int R) override;
+
 	void moveFwrd() override;
 	void moveBwrd() override;
 

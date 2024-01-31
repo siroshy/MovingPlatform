@@ -45,6 +45,7 @@ public:
 	virtual void stop() = 0;
 	virtual void accstop() = 0;
 
+	virtual void diffSpeed(int L, int R) = 0;
 	
 	virtual void moveFwrd() = 0;
 	virtual void moveBwrd() = 0;
