@@ -18,6 +18,8 @@ public:
 	*/
 
 	virtual void invDir(bool inv);
+
+	virtual void speedOffset(int offset);
 	
 	virtual void setOpPWM(int duty) = 0;
 
@@ -28,7 +30,7 @@ protected:
 	bool invDirect;
 	int direction;
 	int speed;
-
+	int spOffset;
 	int opPWM;
 
 };
@@ -45,7 +47,7 @@ public:
 
 	
 	virtual void moveFwrd() = 0;
-	virtual void movebwrd() = 0;
+	virtual void moveBwrd() = 0;
 
 	virtual void turnLft() = 0;
 	virtual void turnRht() = 0;

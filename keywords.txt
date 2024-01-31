@@ -1,22 +1,20 @@
 #######################################
-# Syntax Coloring Map For GyverButton
-#######################################
-
-#######################################
 # Datatypes (KEYWORD1)
 #######################################
 
 Inter_Platform KEYWORD1
 Inter_Driver KEYWORD1
 
+Platform KEYWORD1
 Driver_L256n KEYWORD1
+Niki KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################
 
 moveFwrd KEYWORD2
-movebwrd KEYWORD2
+moveBwrd KEYWORD2
 
 turnLft KEYWORD2
 turnRht KEYWORD2
@@ -31,14 +29,12 @@ setAccMode KEYWORD2
 setAccVal KEYWORD2
 
 setSpeed KEYWORD2
-
 setDirection KEYWORD2
 
 #######################################
 
 invDir KEYWORD2
 setOpPWM KEYWORD2
-
 stMove KEYWORD2
 
 #######################################

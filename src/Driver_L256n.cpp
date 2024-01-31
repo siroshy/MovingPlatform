@@ -80,8 +80,11 @@ void DriverL256n::setDirection(int dir)
 }
 
 void DriverL256n::setOpPWM(int duty)
-{
-	opPWM = duty;
+{	
+	opPWM = duty+spOffset;
+	if(opPWM<0) opPWM = 0;
+	if(opPWM>255) opPWM = 255;
+	
 }
 
 void DriverL256n::stMove()
@@ -92,6 +95,12 @@ void DriverL256n::stMove()
 void DriverL256n::invDir(bool inv)
 {
 	invDirect = inv;
+}
+
+void DriverL256n::speedOffset(int offset){
+	if(offset>254) offset = 254;
+	if (offset<-254) offset = -254;
+	spOffset = offset;	
 }
 
 void DriverL256n::doDir()
