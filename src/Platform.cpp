@@ -15,6 +15,7 @@ Platform::~Platform()
 }
 void Platform::stop()
 {
+
 	leftDr->setDirection(0);
 	rightDr->setDirection(0);
 	rightDr->stMove();
@@ -30,6 +31,29 @@ void Platform::accstop()
 	leftDr->stMove();
 	
 };
+
+void Platform::diffSpeed(int L, int R)
+{
+	if(L>0){
+		leftDr->setDirection(1);
+		leftDr->setOpPWM(L);
+	}else{
+		leftDr->setDirection(1);
+		leftDr->setOpPWM(-1*L);
+	}
+	
+	if(R>0){
+		rightDr->setDirection(2);
+		rightDr->setOpPWM(R);
+	}else{
+		rightDr->setDirection(2);
+		rightDr->setOpPWM(-1*R);
+	}
+
+	rightDr->stMove();
+	leftDr->stMove();
+
+}
 
 void Platform::moveFwrd()
 {
