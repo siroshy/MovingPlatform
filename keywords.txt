@@ -13,6 +13,7 @@ Niki KEYWORD1
 # Methods and Functions (KEYWORD2)
 #######################################
 
+diffSpeed KEYWORD2
 moveFwrd KEYWORD2
 moveBwrd KEYWORD2
 
