@@ -28,9 +28,9 @@ void loop() {
   delay(1000);
   plat.turnRht(); //left motor goes forward, right stopped (↑.) for 1 second
   delay(1000);
-  plat.turnBackLft(); //left motor stopped, right goes backward (.↓) for 1 second
+  plat.turnBackLft(); //left motor goes backward, right stopped (↓.) for 1 second
   delay(1000);
-  plat.turnBackRht(); //left motor goes backward, right stopped (↓.) for 1 second
+  plat.turnBackRht(); //left motor stopped, right goes backward (.↓) for 1 second
   delay(1000);
   plat.circleLft(); //left motor goes backward, right goes forward (↓↑) for 1 second
   delay(1000);
