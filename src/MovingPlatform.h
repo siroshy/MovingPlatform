@@ -5,8 +5,8 @@
 	
 	//Драйверы 
 	//Для драйвера L256N, добавте define L256N перед подключением библиотеки
-	#ifdef L256N
-		#include <Driver_L256n.h>
+	#ifdef L298N
+		#include <DriverL298n.h>
 	#endif
 	//Для драйвера Ники Робот, добавте define NIKI перед подключением библиотеки
 	#ifdef NIKI

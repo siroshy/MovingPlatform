@@ -38,12 +38,12 @@ void Platform::diffSpeed(int L, int R)
 		leftDr->setDirection(1);
 		leftDr->setOpPWM(L);
 	}else{
-		leftDr->setDirection(1);
+		leftDr->setDirection(2);
 		leftDr->setOpPWM(-1*L);
 	}
 	
 	if(R>0){
-		rightDr->setDirection(2);
+		rightDr->setDirection(1);
 		rightDr->setOpPWM(R);
 	}else{
 		rightDr->setDirection(2);
