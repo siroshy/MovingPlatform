@@ -33,9 +33,8 @@ public:
 	void setAccVal(int acc) override;
 
 	void setSpeed(int speed) override;
-	void tickMT() override;
-	void setMinSpeed(int speed) override;
-	void SetSpeedOT(int speed1, int speed2);
+	void tick() override;
+
 };
 
 #endif

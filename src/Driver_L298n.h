@@ -26,12 +26,20 @@ public:
 
 	void speedOffset(int offset) override;
 
-	void setOpPWM(int duty) override;
+	void setTargetSpeed(int duty) override;
+
+	void setAccMode(int duty) override;
+
+	void setAccVal(int duty) override;
+
+	void tick() override;
 
 	void stMove() override;
 
 
 protected:
+
+	void doDir() override;
 
 	int pinIN1;
 	int pinIN2;
@@ -41,9 +49,6 @@ protected:
 	int IN2;
 	int EN;
 
-	void doDir();
-
-	
 };
 
 #endif

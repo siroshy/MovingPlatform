@@ -121,44 +121,27 @@ void Platform::circleRht()
 
 void Platform::setAccMode(bool mode)
 {
-	accMode = mode;
+	leftDr->setAccMode(mode);
+	rightDr->setAccMode(mode);
 };
 
 void Platform::setAccVal(int acc)
 {
+	leftDr->setAccVal(1);
+	rightDr->setAccVal(2);
+};
 
+void tick(){
+	leftDr->tick();
+	rightDr->tick();
 };
 
 void Platform::setSpeed(int speed)
 {
-	leftDr->setOpPWM(speed);
-	rightDr->setOpPWM(speed);
+	leftDr->setTargetSpeed(speed);
+	rightDr->setDirection(speed);
 };
 
-
-void Platform::setMinSpeed(int speed)
-{
-	minSpeed = speed;
-}
-void Platform::tickMT()
-{
-	static int count;
-	unsigned long int tmr;
-	int sp = 0;
-	int stp = movingTime / timeInterval;
-		if ((count < stp) && mv) {
-			if(stp < curSpeed) 
-			{
-				setSpeed(spm += acc);
-			}
-		}else {
-			setSpeed(curSpeed);
-			}
-		if (count == stp) {
-			mv = false;
-			count = 0;
-		}
-};
 
 
 #endif

@@ -79,18 +79,38 @@ void DriverL298n::setDirection(int dir)
 
 }
 
-void DriverL298n::setOpPWM(int duty)
-{	
-	opPWM = duty+spOffset;
-	if(opPWM<0) opPWM = 0;
-	if(opPWM>255) opPWM = 255;
-	
-}
 
-void DriverL298n::stMove()
-{
-	doDir();
-}
+void DriverL298n::setTargetSpeed(int duty){
+
+	targetSpeed = duty+spOffset;
+	if(targetSpeed<0) targetSpeed = 0;
+	if(targetSpeed>255) targetSpeed = 255;
+	
+};
+
+void DriverL298n::setAccMode(bool mode){accMode = mode};
+
+void DriverL298n::setAccVal(int duty){
+	if(duty <= 128 && duty > 0){
+		acc = duty;
+	}
+};
+
+void DriverL298n::tick(){
+	if(!accMode){
+		opPWM = targetSpeed;
+		doDir();
+	}else{
+		if(opPWM < targetSpeed){
+			opPWM += acc;
+			if(opPWM >= targetSpeed) opPWM = targetSpeed;
+		}else{
+			opPWM -= acc;
+			if(opPWM <= targetSpeed) opPWM = targetSpeed;
+		}
+		doDir();
+	}
+};
 
 void DriverL298n::invDir(bool inv)
 {

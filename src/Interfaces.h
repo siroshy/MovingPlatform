@@ -17,21 +17,34 @@ public:
 	3 - Активный тормоз
 	*/
 
-	virtual void invDir(bool inv);
+	virtual void invDir(bool inv) = 0;
 
-	virtual void speedOffset(int offset);
-	
-	virtual void setOpPWM(int duty) = 0;
+	virtual void speedOffset(int offset) = 0;
+
+	virtual void setTargetSpeed(int duty) = 0;
+
+	virtual void setAccMode(int duty) = 0;
+
+	virtual void setAccVal(int duty) = 0;
 
 	virtual void stMove() = 0;
 
+	virtual void tick() = 0;
+
+
+
 protected:
 
+	virtual void doDir() = 0;
+
 	bool invDirect;
+	bool accMode;
+
 	int direction;
-	int speed;
+	int targetSpeed;
 	int spOffset;
 	int opPWM;
+	int acc;
 
 };
 
@@ -59,26 +72,17 @@ public:
 	virtual void circleLft() = 0;
 	virtual void circleRht() = 0;
 
+	virtual void setSpeed(int speed) = 0;
 	virtual void setAccMode(bool mode) = 0;
 	virtual void setAccVal(int acc) = 0;
-
-	virtual void setSpeed(int speed) = 0;
-	virtual void tickMT() = 0;
-	virtual void setMinSpeed(int speed) = 0;
+	virtual void tick() = 0;
 
 
 protected:
 
 	bool accMode;
 	int accVal;
-	int curSpeed;
-	int acc;
-
-	int movingTime;
-	int timeInterval;
-	bool mv; //need moving?
-	int minSpeed = 0;
-	int spm;
+	int targetSpeed;
 
 	InterDriver *leftDr;
 	InterDriver *rightDr;
