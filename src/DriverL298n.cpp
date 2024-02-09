@@ -1,7 +1,7 @@
 #ifndef Driver_L256n_rel
 #define Driver_L256n_rel
 
-#include <Driver_L298n.h>
+#include <DriverL298n.h>
 
 DriverL298n::DriverL298n()
 {
