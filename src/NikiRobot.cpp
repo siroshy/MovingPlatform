@@ -71,9 +71,18 @@ void Niki::setDirection(int dir)
 	}
 }
 
+void Niki::speedOffset(int offset){
+	if(offset>254) offset = 254;
+	if (offset<-254) offset = -254;
+	spOffset = offset;	
+}
+
+
 void Niki::setOpPWM(int duty)
 {
-	opPWM = duty;
+	opPWM = duty+spOffset;
+	if(opPWM<0) opPWM = 0;
+	if(opPWM>255) opPWM = 255;
 }
 
 void Niki::stMove()

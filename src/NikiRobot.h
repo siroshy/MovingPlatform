@@ -25,6 +25,8 @@ public:
 	void invDir(bool inv) override;
 
 	void setOpPWM(int duty) override;
+	
+	void speedOffset(int offset) override;
 
 	void stMove() override;
 
