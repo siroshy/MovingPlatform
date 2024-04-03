@@ -11,7 +11,6 @@ Niki::Niki()
 	invDirect = false;
 	direction = 0;
 	opPWM = 0;
-
 }
 
 Niki::Niki(int IN1pin, int ENpin)
@@ -24,63 +23,57 @@ Niki::Niki(int IN1pin, int ENpin)
 	opPWM = 0;
 	pinMode(pinIN1, OUTPUT);
 	pinMode(pinEN, OUTPUT);
-
 }
-
 
 Niki::~Niki()
 {
-
 }
 
 void Niki::setDirection(int dir)
 {
 
-
-	switch (dir) {
+	switch (dir)
+	{
 	case 0:
-		setOpPWM(0);
-		if (invDirect) {
-			IN1 = 0;
-		}
-		else {
-			IN1 = 1;
-			break;
-		}
+		IN1 = 0;
+		break;
+		
 	case 1:
 
-		if (invDirect) {
+		if (invDirect)
+		{
 			IN1 = 0;
 		}
-		else {
+		else
+		{
 			IN1 = 1;
-
-			break;
 		}
+		break;
 
 	case 2:
 
-		if (invDirect) {
+		if (invDirect)
+		{
 			IN1 = 1;
 		}
-		else {
+		else
+		{
 			IN1 = 0;
-
-			break;
 		}
+		break;
 	}
 }
 
-void Niki::speedOffset(int offset){
-	if(offset>254) offset = 254;
-	if (offset<-254) offset = -254;
-	spOffset = offset;	
+void Niki::speedOffset(int offset)
+{
+	if (offset > 254) offset = 254;
+	if (offset < -254) offset = -254;
+	spOffset = offset;
 }
-
 
 void Niki::setOpPWM(int duty)
 {
-	opPWM = duty+spOffset;
+	opPWM = duty + spOffset;
 	if(opPWM<0) opPWM = 0;
 	if(opPWM>255) opPWM = 255;
 }
