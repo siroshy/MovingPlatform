@@ -13,6 +13,10 @@
 		#include <NikiRobot.h>
 	#endif
 
+	#ifdef NauRA
+		#include <DriverNauRA.h>
+	#endif
+
 	//Платформы
 	#include <Platform.h>
 

@@ -8,6 +8,7 @@ Inter_Driver KEYWORD1
 Platform KEYWORD1
 Driver_L256n KEYWORD1
 Niki KEYWORD1
+DriverNauRA KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
