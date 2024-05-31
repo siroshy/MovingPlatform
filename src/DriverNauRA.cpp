@@ -43,10 +43,11 @@ void DriverNauRA::setDirection(int dir)
 	switch(dir){
 	case 0:
 		direction = 0;
+		digitalWrite(EN, 0);
 		break;
 
 	case 1:
-
+		digitalWrite(EN, 1);
 		if(invDirect){
 			direction = 1;
 		}else{
@@ -56,7 +57,7 @@ void DriverNauRA::setDirection(int dir)
 		break;
 
 	case 2:
-
+		digitalWrite(EN, 1);
 		if(invDirect){
 			direction = 0;
 		}else{
@@ -66,6 +67,7 @@ void DriverNauRA::setDirection(int dir)
 		break;
 
 	case 3:
+		digitalWrite(EN, 1);
 		direction = 0;
 		break;
 
@@ -99,7 +101,6 @@ void DriverNauRA::speedOffset(int offset){
 
 void DriverNauRA::doDir()
 {
-	digitalWrite(EN, 1);
 	digitalWrite(DIR, direction);
 	analogWrite(PWM, opPWM);
 }
