@@ -66,7 +66,6 @@ public:
 	virtual void tickMT() = 0;
 	virtual void setMinSpeed(int speed) = 0;
 
-
 protected:
 
 	bool accMode;
