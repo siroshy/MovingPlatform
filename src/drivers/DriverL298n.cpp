@@ -11,7 +11,7 @@ DriverL298n::DriverL298n()
 
 	invDirect = false;
 	direction = 0;
-	opPWM = 0;
+	operationPWM = 0;
 
 }
 
@@ -23,7 +23,7 @@ DriverL298n::DriverL298n(int IN1pin, int IN2pin, int ENpin )
 
 	invDirect = false;
 	direction = 0;
-	opPWM = 0;
+	operationPWM = 0;
 	pinMode(pinIN1, OUTPUT);
 	pinMode(pinIN2, OUTPUT);
 	pinMode(pinEN, OUTPUT);
@@ -36,17 +36,17 @@ DriverL298n::~DriverL298n()
 
 }
 
-void DriverL298n::setDirection(int dir)
+void DriverL298n::setDirection(DRIVER_DIR dir)
 {
 
 
 	switch(dir){
-	case 0:
+	case DRIVER_DIR::IDLE:
 		IN1 = 0;
 		IN2 = 0;
 		break;
 
-	case 1:
+	case DRIVER_DIR::FORWARD:
 
 		if(invDirect){
 			IN1 = 1;
@@ -58,7 +58,7 @@ void DriverL298n::setDirection(int dir)
 		
 		break;
 
-	case 2:
+	case DRIVER_DIR::BACKWARD:
 
 		if(invDirect){
 			IN1 = 0;
@@ -70,7 +70,7 @@ void DriverL298n::setDirection(int dir)
 
 		break;
 
-	case 3:
+	case DRIVER_DIR::ACTIVE_BREAK :
 		IN1 = 1;
 		IN2 = 1;
 		break;
@@ -79,20 +79,20 @@ void DriverL298n::setDirection(int dir)
 
 }
 
-void DriverL298n::setOpPWM(int duty)
+void DriverL298n::setOperationPWM(int duty)
 {	
-	opPWM = duty+spOffset;
-	if(opPWM<0) opPWM = 0;
-	if(opPWM>255) opPWM = 255;
+	operationPWM = duty+speedOffsetValue;
+	if(operationPWM<0) operationPWM = 0;
+	if(operationPWM>255) operationPWM = 255;
 	
 }
 
-void DriverL298n::stMove()
+void DriverL298n::startMove()
 {
 	doDir();
 }
 
-void DriverL298n::invDir(bool inv)
+void DriverL298n::invDirection(bool inv)
 {
 	invDirect = inv;
 }
@@ -100,14 +100,14 @@ void DriverL298n::invDir(bool inv)
 void DriverL298n::speedOffset(int offset){
 	if(offset>254) offset = 254;
 	if (offset<-254) offset = -254;
-	spOffset = offset;	
+	speedOffsetValue = offset;	
 }
 
 void DriverL298n::doDir()
 {
 	digitalWrite(pinIN1, IN1);
 	digitalWrite(pinIN2,IN2);
-	analogWrite(pinEN,opPWM);
+	analogWrite(pinEN,operationPWM);
 }
 
 #endif

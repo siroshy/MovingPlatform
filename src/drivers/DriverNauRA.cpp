@@ -11,7 +11,7 @@ DriverNauRA::DriverNauRA()
 
 	invDirect = false;
 	direction = 0;
-	opPWM = 0;
+	operationPWM = 0;
 
 }
 
@@ -23,7 +23,7 @@ DriverNauRA::DriverNauRA(int EN, int DIR, int PWM )
 
 	invDirect = false;
 	direction = 0;
-	opPWM = 0;
+	operationPWM = 0;
 	pinMode(this->EN, OUTPUT);
 	pinMode(this->DIR, OUTPUT);
 	pinMode(this->PWM, OUTPUT);
@@ -36,17 +36,17 @@ DriverNauRA::~DriverNauRA()
 
 }
 
-void DriverNauRA::setDirection(int dir)
+void DriverNauRA::setDirection(DRIVER_DIR dir)
 {
 
 
 	switch(dir){
-	case 0:
+	case DRIVER_DIR::IDLE:
 		direction = 0;
 		digitalWrite(EN, 0);
 		break;
 
-	case 1:
+	case DRIVER_DIR::FORWARD:
 		digitalWrite(EN, 1);
 		if(invDirect){
 			direction = 1;
@@ -56,7 +56,7 @@ void DriverNauRA::setDirection(int dir)
 		
 		break;
 
-	case 2:
+	case DRIVER_DIR::BACKWARD:
 		digitalWrite(EN, 1);
 		if(invDirect){
 			direction = 0;
@@ -66,7 +66,7 @@ void DriverNauRA::setDirection(int dir)
 
 		break;
 
-	case 3:
+	case DRIVER_DIR::ACTIVE_BREAK :
 		digitalWrite(EN, 1);
 		direction = 0;
 		break;
@@ -75,20 +75,20 @@ void DriverNauRA::setDirection(int dir)
 
 }
 
-void DriverNauRA::setOpPWM(int duty)
+void DriverNauRA::setOperationPWM(int duty)
 {	
-	opPWM = duty+spOffset;
-	if(opPWM<0) opPWM = 0;
-	if(opPWM>255) opPWM = 255;
+	operationPWM = duty+speedOffsetValue;
+	if(operationPWM<0) operationPWM = 0;
+	if(operationPWM>255) operationPWM = 255;
 	
 }
 
-void DriverNauRA::stMove()
+void DriverNauRA::startMove()
 {
 	doDir();
 }
 
-void DriverNauRA::invDir(bool inv)
+void DriverNauRA::invDirection(bool inv)
 {
 	invDirect = inv;
 }
@@ -96,13 +96,13 @@ void DriverNauRA::invDir(bool inv)
 void DriverNauRA::speedOffset(int offset){
 	if(offset>254) offset = 254;
 	if (offset<-254) offset = -254;
-	spOffset = offset;	
+	speedOffsetValue = offset;	
 }
 
 void DriverNauRA::doDir()
 {
 	digitalWrite(DIR, direction);
-	analogWrite(PWM, opPWM);
+	analogWrite(PWM, operationPWM);
 }
 
 #endif

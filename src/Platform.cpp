@@ -3,162 +3,164 @@
 
 #include <Platform.h>
 
-Platform::Platform(InterDriver *lDr, InterDriver *rDr)
+Platform::Platform(InterDriver *leftDriverRef, InterDriver *rightDriverRef)
 {
-	leftDr = lDr;
-	rightDr = rDr;
+	leftDriver = leftDriverRef;
+	rightDriver = rightDriverRef;
 };
 
 Platform::~Platform()
 {
-
 }
+
 void Platform::stop()
 {
+	_stop();
+};
 
-	leftDr->setDirection(0);
-	rightDr->setDirection(0);
-	rightDr->stMove();
-	leftDr->stMove();
-	
+void Platform::stop(uint16_t del)
+{
+	_stop();
+	delay(del);
 };
 
 void Platform::accstop()
 {
-	leftDr->setDirection(3);
-	rightDr->setDirection(3);
-	rightDr->stMove();
-	leftDr->stMove();
-	
+	leftDriver->setDirection(3);
+	rightDriver->setDirection(3);
+	rightDriver->startMove();
+	leftDriver->startMove();
 };
+
+void Platform::move(DIR dir)
+{
+	_move(dir);
+}
+
+void Platform::move(DIR dir, uint16_t del)
+{
+	_move(dir);
+	delay(del);
+}
 
 void Platform::diffSpeed(int L, int R)
 {
-	if(L>0){
-		leftDr->setDirection(1);
-		leftDr->setOpPWM(L);
-	}else{
-		leftDr->setDirection(2);
-		leftDr->setOpPWM(-1*L);
+	if (L > 0)
+	{
+		leftDriver->setDirection(DRIVER_DIR::FORWARD);
+		leftDriver->setOperationPWM(L);
 	}
-	
-	if(R>0){
-		rightDr->setDirection(1);
-		rightDr->setOpPWM(R);
-	}else{
-		rightDr->setDirection(2);
-		rightDr->setOpPWM(-1*R);
+	else
+	{
+		leftDriver->setDirection(DRIVER_DIR::BACKWARD);
+		leftDriver->setOperationPWM(-1 * L);
 	}
 
-	rightDr->stMove();
-	leftDr->stMove();
+	if (R > 0)
+	{
+		rightDriver->setDirection(DRIVER_DIR::FORWARD);
+		rightDriver->setOperationPWM(R);
+	}
+	else
+	{
+		rightDriver->setDirection(DRIVER_DIR::BACKWARD);
+		rightDriver->setOperationPWM(-1 * R);
+	}
 
+	rightDriver->startMove();
+	leftDriver->startMove();
 }
 
-void Platform::moveFwrd()
+void Platform::_stop()
 {
-	leftDr->setDirection(1);
-	rightDr->setDirection(1);
-	rightDr->stMove();
-	leftDr->stMove();
-	
+	leftDriver->setDirection(DRIVER_DIR::IDLE);
+	rightDriver->setDirection(DRIVER_DIR::IDLE);
+	rightDriver->startMove();
+	leftDriver->startMove();
 };
 
-void Platform::moveBwrd()
+void Platform::_move(DIR dir)
 {
-	leftDr->setDirection(2);
-	rightDr->setDirection(2);
-	rightDr->stMove();
-	leftDr->stMove();
-};
+	switch (dir)
+	{
+	case DIR::FORWARD:
+		leftDriver->setDirection(DRIVER_DIR::FORWARD);
+		rightDriver->setDirection(DRIVER_DIR::FORWARD);
+		break;
 
-void Platform::turnLft()
-{
-	leftDr->setDirection(0);
-	rightDr->setDirection(1);
-	rightDr->stMove();
-	leftDr->stMove();
-};
-void Platform::turnRht()
-{
-	leftDr->setDirection(1);
-	rightDr->setDirection(0);
-	rightDr->stMove();
-	leftDr->stMove();
-};
+	case DIR::BACKWARD:
+		leftDriver->setDirection(DRIVER_DIR::BACKWARD);
+		rightDriver->setDirection(DRIVER_DIR::BACKWARD);
+		break;
 
-void Platform::turnBackLft()
-{
-	leftDr->setDirection(0);
-	rightDr->setDirection(2);
-	rightDr->stMove();
-	leftDr->stMove();
-};
+	case DIR::FORWARD_LEFT:
+		leftDriver->setDirection(DRIVER_DIR::IDLE);
+		rightDriver->setDirection(DRIVER_DIR::FORWARD);
+		break;
 
-void Platform::turnBackRht() 
-{
-	leftDr->setDirection(2);
-	rightDr->setDirection(0);
-	rightDr->stMove();
-	leftDr->stMove();
-};
+	case DIR::FORWARD_RIGHT:
+		leftDriver->setDirection(DRIVER_DIR::FORWARD);
+		rightDriver->setDirection(DRIVER_DIR::IDLE);
+		break;
 
-void Platform::circleLft()
-{
-	leftDr->setDirection(2);
-	rightDr->setDirection(1);
-	rightDr->stMove();
-	leftDr->stMove();
-};
+	case DIR::BACKWARD_LEFT:
+		leftDriver->setDirection(DRIVER_DIR::IDLE);
+		rightDriver->setDirection(DRIVER_DIR::BACKWARD);
+		break;
 
-void Platform::circleRht()
-{
-	leftDr->setDirection(1);
-	rightDr->setDirection(2);
-	rightDr->stMove();
-	leftDr->stMove();
-};
+	case DIR::BACKWARD_RIGHT:
+		leftDriver->setDirection(DRIVER_DIR::BACKWARD);
+		rightDriver->setDirection(DRIVER_DIR::IDLE);
+		break;
+
+	case DIR::ROTATE_LEFT:
+		leftDriver->setDirection(DRIVER_DIR::BACKWARD);
+		rightDriver->setDirection(DRIVER_DIR::FORWARD);
+		break;
+
+	case DIR::ROTATE_RIGHT:
+		leftDriver->setDirection(DRIVER_DIR::FORWARD);
+		rightDriver->setDirection(DRIVER_DIR::BACKWARD);
+		break;
+
+	default:
+		break;
+	}
+
+	rightDriver->startMove();
+	leftDriver->startMove();
+}
 
 void Platform::setAccMode(bool mode)
 {
 	accMode = mode;
 };
 
-void Platform::setAccVal(int acc)
-{
+void Platform::setAccVal(int acc) {
 
 };
 
 void Platform::setSpeed(int speed)
 {
-	leftDr->setOpPWM(speed);
-	rightDr->setOpPWM(speed);
+	leftDriver->setOperationPWM(speed);
+	rightDriver->setOperationPWM(speed);
 };
 
+void Platform::setSpeed(int speed, DRIVER driver)
+{
+	switch (driver)
+	{
+	case DRIVER::LEFT:
+		leftDriver->setOperationPWM(speed);
+		break;
 
-void Platform::setMinSpeed(int speed)
-{
-	minSpeed = speed;
-}
-void Platform::tickMT()
-{
-	static int count;
-	unsigned long int tmr;
-	int sp = 0;
-	int stp = movingTime / timeInterval;
-		if ((count < stp) && mv) {
-			if(stp < curSpeed) 
-			{
-				setSpeed(spm += acc);
-			}
-		}else {
-			setSpeed(curSpeed);
-			}
-		if (count == stp) {
-			mv = false;
-			count = 0;
-		}
+	case DRIVER::RIGHT:
+		rightDriver->setOperationPWM(speed);
+		break;
+
+	default:
+		break;
+	}
 };
-
 
 #endif

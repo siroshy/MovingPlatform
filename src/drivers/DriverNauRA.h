@@ -15,7 +15,7 @@ public:
 	
 	~DriverNauRA();
 
-	void setDirection(int dir) override; 
+	void setDirection(DRIVER_DIR dir) override; 
 	/*
 	0 - Отпущено,
 	1 - Вперед,
@@ -23,13 +23,13 @@ public:
 	3 - Активный тормоз
 	*/
 
-	void invDir(bool inv) override;
+	void invDirection(bool inv) override;
 
 	void speedOffset(int offset) override;
 
-	void setOpPWM(int duty) override;
+	void setOperationPWM(int duty) override;
 
-	void stMove() override;
+	void startMove() override;
 
 
 protected:

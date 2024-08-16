@@ -3,39 +3,69 @@
 
 #include <Interfaces.h>
 
+typedef enum
+{
+	FORWARD,  // Движение вперед
+	BACKWARD, // Движение назад
 
+	FORWARD_LEFT,  // Движение вперед с поворотом налево
+	FORWARD_RIGHT, // Движение вперед с поворотом направо
 
-class Platform : public InterPlatform
+	BACKWARD_LEFT,	// Движение назад с поворотом налево
+	BACKWARD_RIGHT, // Движение назад с поворотом направо
+
+	ROTATE_LEFT, // Поворот на месте против часовой стрелки
+	ROTATE_RIGHT // Поворот на месте по часовой стрелке
+
+}DIR;
+
+typedef enum 
+{
+	LEFT,
+	RIGHT
+}DRIVER;
+
+class Platform
 {
 public:
-	Platform(InterDriver *lDr, InterDriver *rDr);
-	
+	Platform(InterDriver *leftDriverRef, InterDriver *rightDriverRef);
+
 	~Platform();
 
-	void stop() override;
-	void accstop() override;
+	void stop();
+	void stop(uint16_t del);
 
-	void diffSpeed(int L, int R) override;
+	void accstop();
 
-	void moveFwrd() override;
-	void moveBwrd() override;
+	void diffSpeed(int L, int R);
 
-	void turnLft() override;
-	void turnRht() override;
+	void move(DIR dir);
+	void move(DIR dir, uint16_t del);
 
-	void turnBackLft() override;
-	void turnBackRht() override;
+	void setAccMode(bool mode);
+	void setAccVal(int acc);
 
-	void circleLft() override;
-	void circleRht() override;
+	void setSpeed(int speed);
+	void setSpeed(int speed, DRIVER driver);
 
-	void setAccMode(bool mode) override;
-	void setAccVal(int acc) override;
 
-	void setSpeed(int speed) override;
-	void tickMT() override;
-	void setMinSpeed(int speed) override;
-	void SetSpeedOT(int speed1, int speed2);
+protected:
+	void _move(DIR dir);
+	void _stop();
+
+	bool accMode;
+	int accVal;
+	int curSpeed;
+	int acc;
+
+	int movingTime;
+	int timeInterval;
+	bool mv; // need moving?
+	int minSpeed = 0;
+	int spm;
+
+	InterDriver *leftDriver;
+	InterDriver *rightDriver;
 };
 
 #endif
