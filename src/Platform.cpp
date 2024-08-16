@@ -26,8 +26,8 @@ void Platform::stop(uint16_t del)
 
 void Platform::accstop()
 {
-	leftDriver->setDirection(3);
-	rightDriver->setDirection(3);
+	leftDriver->setDirection(DRIVER_DIR::ACTIVE_BREAK);
+	rightDriver->setDirection(DRIVER_DIR::ACTIVE_BREAK);
 	rightDriver->startMove();
 	leftDriver->startMove();
 };
