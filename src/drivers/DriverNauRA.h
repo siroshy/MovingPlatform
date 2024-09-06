@@ -3,13 +3,16 @@
 
 #include <Interfaces.h>
 
-
+enum NAURA_DRIVER{
+	LEFT,
+	RIGHT
+};
 
 class DriverNauRA : public InterDriver
 {
 public:
 
-	DriverNauRA();
+	DriverNauRA(NAURA_DRIVER driver);
 
 	DriverNauRA(int EN, int DIR, int PWM);
 	

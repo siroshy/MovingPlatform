@@ -4,18 +4,29 @@
 	#include <Interfaces.h> //Родительские классы
 	
 	//Драйверы 
-	//Для драйвера L256N, добавте define L256N перед подключением библиотеки
-	#ifdef L298N
+	#define L298N 1
+	#define NIKI  2
+	#define NauRa 3
+
+	#ifndef DRIVER
+		#error Driver is not configured. Add #define DRIVER in your code 
+	#endif
+
+	//Для драйвера L298N,  добавте #define L298N перед подключением библиотеки
+	#if DRIVER == L298N
 		#include <DriverL298n.h>
 	#endif
-	//Для драйвера Ники Робот, добавте define NIKI перед подключением библиотеки
-	#ifdef NIKI
+
+	//Для драйвера Ники Робот, добавте #define NIKI перед подключением библиотеки
+	#ifdef DRIVER == NIKI
 		#include <NikiRobot.h>
 	#endif
 
-	#ifdef NauRA
+	//Для LiveTronick NauRa, добавьте #define NauRa перед подключением библиотеки
+	#ifdef DRIVER == NauRA
 		#include <DriverNauRA.h>
 	#endif
+
 
 	//Платформы
 	#include <Platform.h>
