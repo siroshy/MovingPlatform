@@ -3,12 +3,12 @@
 
 #include <Arduino.h>
 
-typedef enum{
+enum DRIVER_DIR{
 	IDLE,
-	FORWARD,
-	BACKWARD,
+	ROT_LEFT,
+	ROT_RIGHT,
 	ACTIVE_BREAK
-} DRIVER_DIR;
+};
 
 
 class InterDriver

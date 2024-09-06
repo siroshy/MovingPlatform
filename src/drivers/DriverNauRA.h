@@ -4,8 +4,8 @@
 #include <Interfaces.h>
 
 enum NAURA_DRIVER{
-	LEFT,
-	RIGHT
+	LEFT_MOTOR,
+	RIGHT_MOTOR
 };
 
 class DriverNauRA : public InterDriver

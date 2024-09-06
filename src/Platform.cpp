@@ -32,12 +32,12 @@ void Platform::accstop()
 	leftDriver->startMove();
 };
 
-void Platform::move(DIR dir)
+void Platform::move(MOVE_DIR dir)
 {
 	_move(dir);
 }
 
-void Platform::move(DIR dir, uint16_t del)
+void Platform::move(MOVE_DIR dir, uint16_t del)
 {
 	_move(dir);
 	delay(del);
@@ -47,23 +47,23 @@ void Platform::diffSpeed(int L, int R)
 {
 	if (L > 0)
 	{
-		leftDriver->setDirection(DRIVER_DIR::FORWARD);
+		leftDriver->setDirection(DRIVER_DIR::ROT_LEFT);
 		leftDriver->setOperationPWM(L);
 	}
 	else
 	{
-		leftDriver->setDirection(DRIVER_DIR::BACKWARD);
+		leftDriver->setDirection(DRIVER_DIR::ROT_LEFT);
 		leftDriver->setOperationPWM(-1 * L);
 	}
 
 	if (R > 0)
 	{
-		rightDriver->setDirection(DRIVER_DIR::FORWARD);
+		rightDriver->setDirection(DRIVER_DIR::ROT_RIGHT);
 		rightDriver->setOperationPWM(R);
 	}
 	else
 	{
-		rightDriver->setDirection(DRIVER_DIR::BACKWARD);
+		rightDriver->setDirection(DRIVER_DIR::ROT_RIGHT);
 		rightDriver->setOperationPWM(-1 * R);
 	}
 
@@ -79,48 +79,48 @@ void Platform::_stop()
 	leftDriver->startMove();
 };
 
-void Platform::_move(DIR dir)
+void Platform::_move(MOVE_DIR dir)
 {
 	switch (dir)
 	{
-	case DIR::FORWARD:
-		leftDriver->setDirection(DRIVER_DIR::FORWARD);
-		rightDriver->setDirection(DRIVER_DIR::FORWARD);
+	case MOVE_DIR::FORWARD :
+		leftDriver->setDirection(DRIVER_DIR::ROT_LEFT);
+		rightDriver->setDirection(DRIVER_DIR::ROT_LEFT);
 		break;
 
-	case DIR::BACKWARD:
-		leftDriver->setDirection(DRIVER_DIR::BACKWARD);
-		rightDriver->setDirection(DRIVER_DIR::BACKWARD);
+	case MOVE_DIR::BACKWARD :
+		leftDriver->setDirection(DRIVER_DIR::ROT_RIGHT);
+		rightDriver->setDirection(DRIVER_DIR::ROT_RIGHT);
 		break;
 
-	case DIR::FORWARD_LEFT:
+	case MOVE_DIR::FORWARD_LEFT :
 		leftDriver->setDirection(DRIVER_DIR::IDLE);
-		rightDriver->setDirection(DRIVER_DIR::FORWARD);
+		rightDriver->setDirection(DRIVER_DIR::ROT_LEFT);
 		break;
 
-	case DIR::FORWARD_RIGHT:
-		leftDriver->setDirection(DRIVER_DIR::FORWARD);
+	case MOVE_DIR::FORWARD_RIGHT :
+		leftDriver->setDirection(DRIVER_DIR::ROT_LEFT);
 		rightDriver->setDirection(DRIVER_DIR::IDLE);
 		break;
 
-	case DIR::BACKWARD_LEFT:
+	case MOVE_DIR::BACKWARD_LEFT :
 		leftDriver->setDirection(DRIVER_DIR::IDLE);
-		rightDriver->setDirection(DRIVER_DIR::BACKWARD);
+		rightDriver->setDirection(DRIVER_DIR::ROT_LEFT);
 		break;
 
-	case DIR::BACKWARD_RIGHT:
-		leftDriver->setDirection(DRIVER_DIR::BACKWARD);
+	case MOVE_DIR::BACKWARD_RIGHT :
+		leftDriver->setDirection(DRIVER_DIR::ROT_LEFT);
 		rightDriver->setDirection(DRIVER_DIR::IDLE);
 		break;
 
-	case DIR::ROTATE_LEFT:
-		leftDriver->setDirection(DRIVER_DIR::BACKWARD);
-		rightDriver->setDirection(DRIVER_DIR::FORWARD);
+	case MOVE_DIR::CIRCLE_LEFT :
+		leftDriver->setDirection(DRIVER_DIR::ROT_LEFT);
+		rightDriver->setDirection(DRIVER_DIR::ROT_LEFT);
 		break;
 
-	case DIR::ROTATE_RIGHT:
-		leftDriver->setDirection(DRIVER_DIR::FORWARD);
-		rightDriver->setDirection(DRIVER_DIR::BACKWARD);
+	case MOVE_DIR::CIRCLE_RIGHT :
+		leftDriver->setDirection(DRIVER_DIR::ROT_LEFT);
+		rightDriver->setDirection(DRIVER_DIR::ROT_LEFT);
 		break;
 
 	default:
@@ -146,15 +146,15 @@ void Platform::setSpeed(int speed)
 	rightDriver->setOperationPWM(speed);
 };
 
-void Platform::setSpeed(int speed, DRIVER driver)
+void Platform::setSpeed(int speed, CUR_DRIVER driver)
 {
 	switch (driver)
 	{
-	case DRIVER::LEFT:
+	case CUR_DRIVER::LEFT_DRIVER:
 		leftDriver->setOperationPWM(speed);
 		break;
 
-	case DRIVER::RIGHT:
+	case CUR_DRIVER::RIGHT_DRIVER:
 		rightDriver->setOperationPWM(speed);
 		break;
 

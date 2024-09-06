@@ -1,4 +1,4 @@
-#define L298N
+#define DRIVER_TYPE L298N
 #include <MovingPlatform.h>
 // using driver L298n
 #define IN1 9 // pin for direction motor 1
@@ -24,35 +24,35 @@ void loop()
 {
   //=================================================================
   // move forward for 1 second (↑↑)
-  plat.move(DIR::FORWARD, 1000);
+  plat.move(MOVE_DIR::FORWARD, 1000);
 
   //=================================================================
   // move backward for 1 second (↓↓)
-  plat.move(DIR::BACKWARD, 1000);
+  plat.move(MOVE_DIR::BACKWARD, 1000);
 
   //=================================================================
   // left motor stopped, right goes forward (.↑) for 1 secomd
-  plat.move(DIR::FORWARD_LEFT, 1000);
+  plat.move(MOVE_DIR::FORWARD_LEFT, 1000);
 
   //=================================================================
   // left motor goes forward, right stopped (↑.) for 1 second
-  plat.move(DIR::FORWARD_RIGHT, 1000);
+  plat.move(MOVE_DIR::FORWARD_RIGHT, 1000);
 
   //=================================================================
   // left motor goes backward, right stopped (↓.) for 1 second
-  plat.move(DIR::BACKWARD_RIGHT, 1000);
+  plat.move(MOVE_DIR::BACKWARD_RIGHT, 1000);
 
   //=================================================================
   // left motor stopped, right goes backward (.↓) for 1 second
-  plat.move(DIR::BACKWARD_LEFT, 1000);
+  plat.move(MOVE_DIR::BACKWARD_LEFT, 1000);
 
   //=================================================================
   // left motor goes backward, right goes forward (↓↑) for 1 second
-  plat.move(DIR::ROTATE_LEFT, 1000);
+  plat.move(MOVE_DIR::CIRCLE_LEFT, 1000);
 
   //=================================================================
   // left motor goes forward, right goes backward (↑↓) for 1 second
-  plat.move(DIR::ROTATE_RIGHT, 1000);
+  plat.move(MOVE_DIR::CIRCLE_RIGHT, 1000);
 
   //=================================================================
   // both motors stopped (..) for 1 second

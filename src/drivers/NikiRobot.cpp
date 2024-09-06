@@ -34,11 +34,11 @@ void Niki::setDirection(DRIVER_DIR dir)
 
 	switch (dir)
 	{
-	case DRIVER_DIR::IDLE:
+	case DRIVER_DIR::IDLE :
 		IN1 = 0;
 		break;
 		
-	case DRIVER_DIR::FORWARD:
+	case DRIVER_DIR::FORWARD :
 
 		if (invDirect)
 		{
@@ -50,7 +50,7 @@ void Niki::setDirection(DRIVER_DIR dir)
 		}
 		break;
 
-	case DRIVER_DIR::BACKWARD:
+	case DRIVER_DIR::BACKWARD :
 
 		if (invDirect)
 		{
