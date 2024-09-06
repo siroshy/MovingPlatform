@@ -1,11 +1,11 @@
 #ifndef DriverNAURA
 #define DriverNAURA
 
-#include <Interfaces.h>
+#include "Interfaces.h"
 
 enum NAURA_DRIVER{
-	LEFT_MOTOR,
-	RIGHT_MOTOR
+	MOTOR_A,
+	MOTOR_B
 };
 
 class DriverNauRA : public InterDriver

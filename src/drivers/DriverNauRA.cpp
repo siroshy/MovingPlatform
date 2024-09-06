@@ -1,13 +1,13 @@
 #ifndef DriverNauRA_rel
 #define DriverNauRA_rel
 
-#include <DriverNauRA.h>
+#include "DriverNauRA.h"
 
 DriverNauRA::DriverNauRA(NAURA_DRIVER driver)
 {
 	switch (driver)
 	{
-	case NAURA_DRIVER::LEFT:
+	case NAURA_DRIVER::MOTOR_A :
 	{
 		this->EN = 48;
 		this->DIR = 47;
@@ -15,7 +15,7 @@ DriverNauRA::DriverNauRA(NAURA_DRIVER driver)
 	}
 	break;
 
-	case NAURA_DRIVER::RIGHT:
+	case NAURA_DRIVER::MOTOR_B :
 	{
 		this->EN = 42;
 		this->DIR = 43;
@@ -68,7 +68,7 @@ void DriverNauRA::setDirection(DRIVER_DIR dir)
 		digitalWrite(EN, 0);
 		break;
 
-	case DRIVER_DIR::FORWARD:
+	case DRIVER_DIR::ROT_LEFT :
 		digitalWrite(EN, 1);
 		if (invDirect)
 		{
@@ -81,7 +81,7 @@ void DriverNauRA::setDirection(DRIVER_DIR dir)
 
 		break;
 
-	case DRIVER_DIR::BACKWARD:
+	case DRIVER_DIR::ROT_RIGHT :
 		digitalWrite(EN, 1);
 		if (invDirect)
 		{

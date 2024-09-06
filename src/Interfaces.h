@@ -14,8 +14,8 @@ enum DRIVER_DIR{
 class InterDriver
 {
 public:
-	InterDriver();
-	virtual ~InterDriver();
+	//InterDriver();
+	//virtual ~InterDriver();
 
 	virtual void setDirection(DRIVER_DIR dir) = 0; 
 	/*

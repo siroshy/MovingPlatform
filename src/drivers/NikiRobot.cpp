@@ -1,7 +1,7 @@
 #ifndef Niki_robot_H_rel
 #define Niki_robot_H_rel
 
-#include <NikiRobot.h>
+#include "NikiRobot.h"
 
 Niki::Niki()
 {
@@ -38,7 +38,7 @@ void Niki::setDirection(DRIVER_DIR dir)
 		IN1 = 0;
 		break;
 		
-	case DRIVER_DIR::FORWARD :
+	case DRIVER_DIR::ROT_LEFT :
 
 		if (invDirect)
 		{
@@ -50,7 +50,7 @@ void Niki::setDirection(DRIVER_DIR dir)
 		}
 		break;
 
-	case DRIVER_DIR::BACKWARD :
+	case DRIVER_DIR::ROT_RIGHT :
 
 		if (invDirect)
 		{

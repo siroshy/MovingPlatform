@@ -1,7 +1,7 @@
 #ifndef Driver_L256n_rel
 #define Driver_L256n_rel
 
-#include <DriverL298n.h>
+#include "DriverL298n.h"
 
 DriverL298n::DriverL298n()
 {
@@ -46,7 +46,7 @@ void DriverL298n::setDirection(DRIVER_DIR dir)
 		IN2 = 0;
 		break;
 
-	case DRIVER_DIR::FORWARD:
+	case DRIVER_DIR::ROT_LEFT :
 
 		if(invDirect){
 			IN1 = 1;
@@ -58,7 +58,7 @@ void DriverL298n::setDirection(DRIVER_DIR dir)
 		
 		break;
 
-	case DRIVER_DIR::BACKWARD:
+	case DRIVER_DIR::ROT_RIGHT :
 
 		if(invDirect){
 			IN1 = 0;
