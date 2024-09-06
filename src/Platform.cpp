@@ -24,13 +24,6 @@ void Platform::stop(uint16_t del)
 	delay(del);
 };
 
-void Platform::accstop()
-{
-	leftDriver->setDirection(DRIVER_DIR::ACTIVE_BREAK);
-	rightDriver->setDirection(DRIVER_DIR::ACTIVE_BREAK);
-	rightDriver->startMove();
-	leftDriver->startMove();
-};
 
 void Platform::move(MOVE_DIR dir)
 {
@@ -130,15 +123,6 @@ void Platform::_move(MOVE_DIR dir)
 	rightDriver->startMove();
 	leftDriver->startMove();
 }
-
-void Platform::setAccMode(bool mode)
-{
-	accMode = mode;
-};
-
-void Platform::setAccVal(int acc) {
-
-};
 
 void Platform::setSpeed(int speed)
 {
