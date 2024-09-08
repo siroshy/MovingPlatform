@@ -15,7 +15,7 @@ Platform plat(&LMotor, &RMotor); // configurating platform with motor 1 and moto
 
 void setup()
 {
-  plat.setAccelerationParams(1000, 128);
+  plat.setAccelerationParams(1000, 64);
 }
 
 void loop()
@@ -23,10 +23,21 @@ void loop()
   //=================================================================
   // move forward for 3 second (↑↑)
   plat.move(MOVE_DIR::FORWARD, 3000, 128, 1);
+  plat.stop(1000);
 
   //=================================================================
   // move backward for 3 second (↓↓)
   plat.move(MOVE_DIR::BACKWARD, 3000, 128, 1);
+  plat.stop(1000);
 
+    //=================================================================
+  // move backward for 3 second (↓↓)
+  plat.move(MOVE_DIR::FORWARD_LEFT, 3000, 128, 1);
+  plat.stop(1000);
+
+      //=================================================================
+  // move backward for 3 second (↓↓)
+  plat.move(MOVE_DIR::FORWARD_RIGHT, 3000, 128, 1);
   plat.stop(1000);
 }
+

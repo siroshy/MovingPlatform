@@ -42,8 +42,6 @@ public:
 	/// @param duty Значение ШИМ в диапазоне 0 ... 255
 	virtual void setOperationPWM(int duty) = 0;
 
-	virtual uint16_t getOperationPWM(int duty) = 0;
-
 //=============================================================================
 // Выполнение команды
 
@@ -63,6 +61,8 @@ protected:
 	int speedOffsetValue;
 
 	uint16_t operationPWM;
+
+	uint16_t direction;
 
 };
 

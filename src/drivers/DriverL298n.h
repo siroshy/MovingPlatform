@@ -31,8 +31,6 @@ public:
 
 	void setOperationPWM(int duty) override;
 
-	uint16_t getOperationPWM(int duty) override;
-
 	void startMove() override;
 
 protected:

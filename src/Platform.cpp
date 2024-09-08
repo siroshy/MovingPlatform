@@ -43,6 +43,7 @@ void Platform::move(MOVE_DIR dir, uint16_t del, uint16_t targetSpeed, bool accel
 		{
 			setSpeed(speedStep * i);
 			_move();
+			delay(accelerationConfig.stepDelay);
 		}
 	}
 	setSpeed(targetSpeed);
