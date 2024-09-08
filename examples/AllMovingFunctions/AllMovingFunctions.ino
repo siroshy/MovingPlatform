@@ -15,44 +15,44 @@ Platform plat(&LMotor, &RMotor); // configurating platform with motor 1 and moto
 
 void setup()
 {
-  plat.setSpeed(130);        // set speed for both motors
   LMotor.speedOffset(-10);   // offset left motor speed -10
   LMotor.invDirection(true); // inversion of direction for left motor
+  plat.setAccelerationParams(1000, 128);
 }
 
 void loop()
 {
   //=================================================================
   // move forward for 1 second (↑↑)
-  plat.move(MOVE_DIR::FORWARD, 1000);
+  plat.move(MOVE_DIR::FORWARD, 1000, 130);
 
   //=================================================================
   // move backward for 1 second (↓↓)
-  plat.move(MOVE_DIR::BACKWARD, 1000);
+  plat.move(MOVE_DIR::BACKWARD, 1000, 130);
 
   //=================================================================
   // left motor stopped, right goes forward (.↑) for 1 secomd
-  plat.move(MOVE_DIR::FORWARD_LEFT, 1000);
+  plat.move(MOVE_DIR::FORWARD_LEFT, 1000, 130);
 
   //=================================================================
   // left motor goes forward, right stopped (↑.) for 1 second
-  plat.move(MOVE_DIR::FORWARD_RIGHT, 1000);
+  plat.move(MOVE_DIR::FORWARD_RIGHT, 1000, 130);
 
   //=================================================================
   // left motor goes backward, right stopped (↓.) for 1 second
-  plat.move(MOVE_DIR::BACKWARD_RIGHT, 1000);
+  plat.move(MOVE_DIR::BACKWARD_RIGHT, 1000, 130);
 
   //=================================================================
   // left motor stopped, right goes backward (.↓) for 1 second
-  plat.move(MOVE_DIR::BACKWARD_LEFT, 1000);
+  plat.move(MOVE_DIR::BACKWARD_LEFT, 1000, 130);
 
   //=================================================================
   // left motor goes backward, right goes forward (↓↑) for 1 second
-  plat.move(MOVE_DIR::CIRCLE_LEFT, 1000);
+  plat.move(MOVE_DIR::CIRCLE_LEFT, 1000, 130);
 
   //=================================================================
   // left motor goes forward, right goes backward (↑↓) for 1 second
-  plat.move(MOVE_DIR::CIRCLE_RIGHT, 1000);
+  plat.move(MOVE_DIR::CIRCLE_RIGHT, 1000, 130);
 
   //=================================================================
   // both motors stopped (..) for 1 second

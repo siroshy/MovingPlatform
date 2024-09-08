@@ -42,6 +42,8 @@ public:
 	/// @param duty Значение ШИМ в диапазоне 0 ... 255
 	virtual void setOperationPWM(int duty) = 0;
 
+	virtual uint16_t getOperationPWM(int duty) = 0;
+
 //=============================================================================
 // Выполнение команды
 
@@ -51,12 +53,16 @@ public:
 
 protected:
 
+	/// @brief Флаг перманентной инверсии вращения
 	bool invDirect;
 
-	int direction;
+	/// @brief Текущее значение ШИМ
 	int speed;
+
+	/// @brief Смещение значения ШИМ
 	int speedOffsetValue;
-	int operationPWM;
+
+	uint16_t operationPWM;
 
 };
 

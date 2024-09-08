@@ -7,6 +7,7 @@ Platform::Platform(InterDriver *leftDriverRef, InterDriver *rightDriverRef)
 {
 	leftDriver = leftDriverRef;
 	rightDriver = rightDriverRef;
+	setAccelerationParams(250, 64);
 };
 
 Platform::~Platform()
@@ -27,13 +28,26 @@ void Platform::stop(uint16_t del)
 
 void Platform::move(MOVE_DIR dir)
 {
-	_move(dir);
+	_dir(dir);
+	_move();
 }
 
-void Platform::move(MOVE_DIR dir, uint16_t del)
+void Platform::move(MOVE_DIR dir, uint16_t del, uint16_t targetSpeed, bool accelMove = false)
 {
-	_move(dir);
-	delay(del);
+	
+	_dir(dir);
+	uint16_t speedStep = targetSpeed / accelerationConfig.numSteps;
+	if (accelMove)
+	{
+		for (int i = 0; i < accelerationConfig.numSteps; i++)
+		{
+			setSpeed(speedStep * i);
+			_move();
+		}
+	}
+	setSpeed(targetSpeed);
+	_move();
+	delay(del - accelerationConfig.speedUpTimer);
 }
 
 void Platform::diffSpeed(int L, int R)
@@ -72,7 +86,14 @@ void Platform::_stop()
 	leftDriver->startMove();
 };
 
-void Platform::_move(MOVE_DIR dir)
+void Platform::setAccelerationParams(const uint16_t speedUpTimer, const uint16_t numSteps)
+{
+	accelerationConfig.numSteps = numSteps;
+	accelerationConfig.speedUpTimer = speedUpTimer;
+	accelerationConfig.stepDelay = speedUpTimer / numSteps;
+}
+
+void Platform::_dir(MOVE_DIR dir)
 {
 	switch (dir)
 	{
@@ -119,7 +140,10 @@ void Platform::_move(MOVE_DIR dir)
 	default:
 		break;
 	}
+}
 
+void Platform::_move()
+{
 	rightDriver->startMove();
 	leftDriver->startMove();
 }

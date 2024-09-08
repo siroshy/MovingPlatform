@@ -10,7 +10,6 @@ DriverL298n::DriverL298n()
 	pinEN = 0;
 
 	invDirect = false;
-	direction = 0;
 	operationPWM = 0;
 
 }
@@ -22,7 +21,6 @@ DriverL298n::DriverL298n(int IN1pin, int IN2pin, int ENpin )
 	pinEN = ENpin;
 
 	invDirect = false;
-	direction = 0;
 	operationPWM = 0;
 	pinMode(pinIN1, OUTPUT);
 	pinMode(pinIN2, OUTPUT);
